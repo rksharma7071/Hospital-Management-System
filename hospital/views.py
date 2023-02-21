@@ -1,12 +1,29 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import *
+from django.contrib import messages
+from .models import Patient
+from .forms import PatientForm
+
+
+def add_patient(request):
+    if request.method == 'POST':
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Patient added successfully.')
+            return redirect('patient_management')
+    else:
+        form = PatientForm()
+    return render(request, 'add_patient.html', {'form': form})
+
+
 
 def home(request):
     if not request.user.is_authenticated:
-        return redirect('login_view')
+        return redirect('login')
     return render(request, 'dashboard.html', locals())
 
 
@@ -32,12 +49,12 @@ def login_view(request):
 @login_required
 def dashboard(request):
     if not request.user.is_authenticated:
-        return redirect('login_view')
+        return redirect('login')
     return render(request, 'dashboard.html', locals())
 
 def patient(request):
     if not request.user.is_authenticated:
-        return redirect('login_view')
+        return redirect('login')
     
     patients = Patient.objects.all()
     doctors = Doctor.objects.all()
@@ -61,7 +78,7 @@ def patient(request):
 def patient_update(request, id):
 
     if not request.user.is_authenticated:
-        return redirect('login_view')
+        return redirect('login')
     
     patient_update = Patient.objects.get(id = id)
     print('-------------------------------',patient_update, '------------------------')
@@ -81,3 +98,9 @@ def patient_update(request, id):
         # Redirect to a success page
         return render(request, 'patient update.html', locals())
     return render(request, 'patient update.html', locals())
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('login')

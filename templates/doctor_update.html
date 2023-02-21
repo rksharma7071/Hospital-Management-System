@@ -1,0 +1,53 @@
+{% extends "dashboard.html" %}
+
+
+
+{% block dash_main %}
+<main class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+    <div class="chartjs-size-monitor">
+        <div class="chartjs-size-monitor-expand">
+            <div class=""></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink">
+            <div class=""></div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Doctor</h1>
+    </div>
+
+    <div class="container">
+        <form method="post">{% csrf_token %}
+            <div class="row">
+                <div class="col-4">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{doctor.name}}" required><br>
+                </div>
+                <div class="col-4">
+                    <label for="speciality" class="form-label">Speciality</label>
+                    <input type="text" id="speciality" name="speciality" class="form-control" value="{{doctor.speciality}}" required><br>
+                    <br>
+                </div>   
+                <div class="col-4">
+                    <label for="address" class="form-label">Address</label>
+                    <input id="address" name="address" class="form-control" value="{{doctor.address}}" required><br>
+                </div>   
+                <div class="col-4">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" value="{{doctor.phone}}" pattern="[0-9]{10}" required><br>
+                </div>   
+                <div class="col-4">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" value="{{doctor.email}}" class="form-control"><br>
+                </div>     
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+            </div>
+            </form>
+    </div>
+</main>
+{% endblock dash_main %}
+    

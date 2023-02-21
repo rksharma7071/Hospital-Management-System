@@ -1,0 +1,110 @@
+{% extends "dashboard.html" %}
+
+
+{% block title %}Patient Profile{% endblock title %}
+    
+{% block dash_main %}
+<div class="container">
+    <h1 class="text-center mb-5">Patient Profile</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-header"><h2>Personal Information</h2></div>
+          <div class="card-body">
+            <table class="table table-borderless">
+                <tr>
+                    <td>Name</td>
+                    <th>{{patient.name}}</th>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <th>{{patient.dob}}</th>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <th>{{patient.gender}}</th>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <th>{{patient.address}} </th>
+                </tr>
+            </table>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header"><h2>Appointment Information</h2></div>
+          <div class="card-body">
+            <table class="table table-borderless">
+              <tr>
+                  <td>Department</td>
+                  <th>Cardiology</th>
+              </tr>
+              <tr>
+                  <td>Ward</td>
+                  <th>3A</th>
+              </tr>
+              <tr>
+                  <td>Doctor</td>
+                  <th>{{appointment.doctor}}</th>
+              </tr>
+              <tr>
+                  <td>Appointment Date and Time</td>
+                  <th>March 1, 2023 at 10:00 AM</th>
+              </tr>
+          </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h2>Medical Record Information</h2>
+          </div>
+          <div class="card-body">
+            <table class="table table-borderless">
+              <tr>
+                  <td>Medical Record Number</td>
+                  <th>1234567</th>
+              </tr>
+              <tr>
+                  <td>Medical History</td>
+                  <th>
+                    <ul>
+                      <li>High blood pressure</li>
+                      <li>Family history of heart disease</li>
+                    </ul>
+                  </th>
+              </tr>
+              
+          </table>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h2>Payment Information</h2>
+          </div>
+          <div class="card-body">
+            <table class="table table-borderless">
+              <tr>
+                  <td>Insurance Provider</td>
+                  <th>XYZ Insurance</th>
+              </tr>
+              <tr>
+                  <td>Policy Number</td>
+                  <th>7890123</th>
+              </tr>
+          </table>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h2>Admission Information</h2>
+          </div>
+          <div class="card-body">
+            <p>If further treatment is necessary, John may be admitted to the hospital. In that case, he will be assigned to Ward 3A and will be under the care of Dr. Johnson. His medical record and insurance information will be used to facilitate payment and ensure that he receives the appropriate care.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock dash_main %}
