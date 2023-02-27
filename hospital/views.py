@@ -27,35 +27,34 @@ def home(request):
     return render(request, 'dashboard.html', locals())
 
 
-
 def login_view(request):
-    if not request.user.is_authenticated:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('dashboard')  # Replace 'home' with the name of your home page URL pattern
-            else:
-                error_message = 'Invalid username or password'
-        else:
-            error_message = None
-        return render(request, 'login.html', locals())
-    else:
+    if request.user.is_authenticated:
         return redirect('dashboard')
+    
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username = username, password = password)
+        if user is not None:
+            login(request,user)
+            error_message = "Login Successful"
+            return render(request, 'dashboard.html', locals())
+        else:
+            error_message = "Invalid Username or Password"
+            return render(request,'login.html', locals())
+    return render(request,'login.html', locals())
+    
+        
 
 
-@login_required
+
+@login_required(login_url='/login/')
 def dashboard(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
     return render(request, 'dashboard.html', locals())
 
+@login_required(login_url='/login/')
 def patient(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
+   
     patients = Patient.objects.all()
     doctors = Doctor.objects.all()
     if request.method == 'POST':

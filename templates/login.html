@@ -33,4 +33,13 @@
     </div>
     
 {% endblock main %}
+<script>
     
+    {% if error_message == "Login Successful" %}
+        alert('Login Successful');
+    {% endif %}
+    {% if error_message == "Invalid Username or Password" %}
+        alert('Invalid Username or Password');
+    {% endif %}
+        
+</script>
